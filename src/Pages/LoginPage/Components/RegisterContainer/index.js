@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const BorderA = styled.div`
-  width: 100%;
-  height: 40vh;
+  width: 40vw;
+  height: 53vh;
   background-color: #fff;
   border: none;
   border-radius: 30px;
@@ -13,6 +13,7 @@ const BorderA = styled.div`
   margin-bottom: 30px;
 
   @media (max-width: 1000px) {
+    width: 100%;
     height: auto;
     margin-bottom: -30px;
   }
@@ -37,24 +38,28 @@ const BorderC = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10%;
+  gap: 30px;
 
   @media (max-width: 1000px) {
     padding: 20px 10px;
-    gap: 30px;
   }
 `;
 
 const Form = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 30px;
   width: 100%;
-  
+
   @media (max-width: 1000px) {
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
   }
 `;
 
@@ -64,7 +69,7 @@ const Inputs = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  width: 80%;
+  width: 100%;
 
   @media (max-width: 1000px) {
     gap: 10px;
@@ -76,10 +81,10 @@ const Text2 = styled.h2`
   color: #523f85;
   cursor: default;
   text-align: center;
-  
+
   @media (max-width: 1000px) {
     font-size: 2rem;
-  }
+  } 
 `;
 
 const Input = styled.div`
@@ -91,6 +96,10 @@ const Input = styled.div`
 
 const ButtonDiv = styled.div`
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -114,7 +123,7 @@ const Button = styled.button`
   }
 `;
 
-function LoginContainer() {
+function RegisterContainer() {
   const navigate = useNavigate();
 
   return (
@@ -122,6 +131,24 @@ function LoginContainer() {
       <BorderB>
         <BorderC>
           <Form>
+            <Inputs>
+              <Text2>Nome Completo</Text2>
+              <Input>
+                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
+              </Input>
+            </Inputs>
+            <Inputs>
+              <Text2>CPF</Text2>
+              <Input>
+                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
+              </Input>
+            </Inputs>
+            <Inputs>
+              <Text2>Data de Nascimento</Text2>
+              <Input>
+                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
+              </Input>
+            </Inputs>
             <Inputs>
               <Text2>E-mail</Text2>
               <Input>
@@ -134,9 +161,15 @@ function LoginContainer() {
                 <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
               </Input>
             </Inputs>
+            <Inputs>
+              <Text2>Confirmar Senha</Text2>
+              <Input>
+                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
+              </Input>
+            </Inputs>
           </Form>
           <ButtonDiv>
-            <Button onClick={() => navigate("/home")}>Fazer Login</Button>
+            <Button onClick={() => navigate("/home")}>Fazer Cadastro</Button>
           </ButtonDiv>
         </BorderC>
       </BorderB>
@@ -144,4 +177,4 @@ function LoginContainer() {
   );
 }
 
-export default LoginContainer;
+export default RegisterContainer;

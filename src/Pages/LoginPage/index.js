@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Assets/Delas-Logo.png";
-import LogoContainer from "./Components/LoginContainer";
+import LoginContainer from "./Components/LoginContainer";
+import RegisterContainer from "./Components/RegisterContainer";
 
 const Main = styled.main`
   width: 100vw;
   height: 100vh;
+  padding: 50px 0px;
 
   @media (max-width: 1000px) {
     width: auto;
@@ -129,6 +131,12 @@ const Button = styled.button`
 `;
 
 function LoginPage() {
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  const toggleIsRegistering = () => {
+    setIsRegistering(!isRegistering);
+  }
+
   return (
     <Main>
       <Interface>
@@ -138,14 +146,16 @@ function LoginPage() {
               <Img src={Logo} alt="" />
             </div>
             <div>
-              <Text>Para iniciarmos, realize o login.</Text>
+              {isRegistering ? <Text>Para iniciarmos, realize o cadastro.</Text> : <Text>Para iniciarmos, realize o login.</Text>}
             </div>
           </ImgTextWrapper>
-          <LogoContainer />
+          {isRegistering ? <RegisterContainer /> : <LoginContainer />}
         </ContainerImgTextWrapper>
         <RegisterDiv>
-          <RegisterText>Nao tem uma conta?</RegisterText>
-          <Button onClick={() => alert("Prototipagem ilustrativa. Cadastro indisponivel.")}>CADASTRO</Button>
+          {isRegistering ?
+            <RegisterText>Ja tem uma conta?</RegisterText> :
+            <RegisterText>Nao tem uma conta?</RegisterText>}
+          <Button onClick={toggleIsRegistering}>CADASTRO</Button>
         </RegisterDiv>
       </Interface>
     </Main>
