@@ -116,10 +116,28 @@ const Button = styled.button`
   background-color: #fff;
   border: 2px solid #523f85;
   border-radius: 10px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #efefef;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
 
   @media (max-width: 1000px) {
     height: 45px;
     font-size: 20px;
+    
+    &:hover {
+      background-color: #fff;
+      transform: none;
+    }
+
+    &:active {
+      color: #fff;
+      background-color: #523f85;
+      border: 2px solid #fff;
+    }
   }
 `;
 
@@ -182,7 +200,7 @@ const sliderSettings = {
   nextArrow: <CustomNextArrow />,
 };
 
-function EventsContainer({ title, events, isLast }) {
+function EventsContainer({ title, events, isLast, buttonClick }) {
   return (
     <Event isLast={isLast}>
       <EventTitle>{title}</EventTitle>
@@ -203,7 +221,7 @@ function EventsContainer({ title, events, isLast }) {
           ))}
         </Slides>
         <ButtonDiv>
-          <Button>VER MAIS</Button>
+          <Button onClick={buttonClick}>VER MAIS</Button>
         </ButtonDiv>
       </EventInfo>
     </Event>

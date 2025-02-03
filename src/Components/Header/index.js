@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Logo from '../../Assets/Delas-Logo.png';
 import ProfilePic from '../../Assets/BlackIcon.PNG';
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 const HeaderStyle = styled.header`
-  width: 100%;
+  width: 100vw;
   height: auto;
   padding: 30px 5%;
 `;
@@ -45,9 +46,10 @@ const MenuIcon = styled.div`
 
 const NavMenu = styled.ul`
   display: flex;
-  gap: 80px;
+  gap: 0px;
   list-style: none;
   transition: all 0.3s ease;
+  width: 70%;
 
   @media (min-width: 1000px) {
     justify-content: center;
@@ -77,6 +79,7 @@ const LiStyle = styled.li`
   transition: 0.3s;
   padding: 0px 15px;
   width: 100%;
+  text-align: center;
 
   &:hover {
     transform: scale(1.05);
@@ -96,6 +99,7 @@ const LinkStyle = styled.a`
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (menuOpen) {
@@ -108,17 +112,24 @@ function Header() {
   return (
     <HeaderStyle>
       <Interface>
-        <Img src={Logo} alt="DELASFC" />
+        <Img
+          src={Logo}
+          alt="DELASFC"
+          onClick={() => navigate("/home")}
+        />
         <MenuIcon onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}
         </MenuIcon>
         <NavMenu open={menuOpen}>
-          <LiStyle><LinkStyle href="#">CHECK-IN DELASFC</LinkStyle></LiStyle>
-          <LiStyle><LinkStyle href="#">CHECK-IN EXTERNO</LinkStyle></LiStyle>
-          <LiStyle><LinkStyle href="#">APCEF/PR</LinkStyle></LiStyle>
+          <LiStyle><LinkStyle href="/checkinDelasFC">CHECK-IN DELASFC</LinkStyle></LiStyle>
+          <LiStyle><LinkStyle href="#">CHECK-IN PELADAS</LinkStyle></LiStyle>
           <LiStyle><LinkStyle href="#">CONTATE-NOS</LinkStyle></LiStyle>
         </NavMenu>
-        <Img src={ProfilePic} alt="Perfil" style={{ borderRadius: "100%", width: "auto", height: "70px", border: "2px solid #fff" }} />
+        <Img
+          src={ProfilePic}
+          alt="Perfil"
+          style={{ borderRadius: "100%", width: "auto", height: "70px", border: "2px solid #fff" }}
+        />
       </Interface>
     </HeaderStyle>
   );

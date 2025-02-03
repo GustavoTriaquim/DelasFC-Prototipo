@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TeamPic from "../../../../Assets/TemLogo.png";
 import DelasPic from "../../../../Assets/Delas-Logo.png";
 import EventsContainer from "./Components/EventsContainer";
+import { useNavigate } from "react-router-dom";
 
 const Main = styled.main`
   width: 100%;
@@ -24,6 +25,8 @@ const BorderA = styled.div`
 `;
 
 function HomeContainer() {
+  const navigate = useNavigate();
+
   return (
     <Main>
       <BorderA>
@@ -64,10 +67,11 @@ function HomeContainer() {
               time: "Horario B - Adulto",
             }
           ]}
+          buttonClick={() => navigate("/checkinDelasFC")}
         />
         <EventsContainer
           isLast={true}
-          title="TREINOS EXTERNOS"
+          title="PELADAS DELASFC"
           events={[
             {
               picture: TeamPic,
