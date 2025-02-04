@@ -90,6 +90,7 @@ function HomeContainer() {
               time: "Horario B",
             }
           ]}
+          buttonClick={() => navigate("/checkinPeladas")}
         />
       </BorderA>
     </Main>

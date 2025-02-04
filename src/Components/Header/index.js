@@ -72,6 +72,7 @@ const NavMenu = styled.ul`
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
     transition: transform 0.3s ease-in-out;
     box-shadow: 0px 0px 8px #0c0c0c9d;
+    gap: 30px;
   }
 `;
 
@@ -83,6 +84,11 @@ const LiStyle = styled.li`
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 1000px) {
+    text-align: right;
+    padding: 0px 30px;
   }
 `;
 
@@ -121,9 +127,18 @@ function Header() {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </MenuIcon>
         <NavMenu open={menuOpen}>
-          <LiStyle><LinkStyle href="/checkinDelasFC">CHECK-IN DELASFC</LinkStyle></LiStyle>
-          <LiStyle><LinkStyle href="#">CHECK-IN PELADAS</LinkStyle></LiStyle>
-          <LiStyle><LinkStyle href="#">CONTATE-NOS</LinkStyle></LiStyle>
+          <LiStyle>
+            <LinkStyle
+              href="/checkinDelasFC">CHECK-IN DELASFC</LinkStyle>
+          </LiStyle>
+          <LiStyle>
+            <LinkStyle
+              href="/checkinPeladas">CHECK-IN PELADAS</LinkStyle>
+          </LiStyle>
+          <LiStyle>
+            <LinkStyle
+              href="#">CONTATE-NOS</LinkStyle>
+          </LiStyle>
         </NavMenu>
         <Img
           src={ProfilePic}
