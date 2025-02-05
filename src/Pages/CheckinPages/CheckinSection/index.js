@@ -94,13 +94,13 @@ const CheckListContainer = styled.div`
   }
 `;
 
-const CheckItem = styled.label`
+const CheckItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding: 25px;
   cursor: pointer;
-  background: ${(props) => (props.selected ? "#d8cfee" : "#e8e8e8")};
+  background: ${({ selected }) => (selected ? "#d8cfee !important" : "#e8e8e8")};
   margin-bottom: 5px;
   transition: 0.3s;
   width: 100%;
@@ -116,9 +116,10 @@ const CheckItem = styled.label`
   @media (max-width: 1000px) {
     padding: 12px;
     font-size: 13px;
+    transition: 0s;
 
     &:hover {
-      background: none;
+      background: #e8e8e8;
     }
   }
 `;
@@ -177,13 +178,15 @@ function CheckinSection({ title, trainings }) {
                   key={index}
                   selected={isSelected}
                   onClick={() => toggleSelection(index)}
-                  htmlFor={`check-${index}`}
                 >
                   <CheckInput
                     type="checkbox"
                     id={`check-${index}`}
                     checked={isSelected}
-                    onChange={() => toggleSelection(index)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      toggleSelection(index);
+                    }}
                   />
                   <CustomCheck selected={isSelected}>
                     {isSelected && <FaCheck />}
