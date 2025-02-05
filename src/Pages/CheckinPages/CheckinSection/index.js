@@ -116,7 +116,7 @@ const CheckItem = styled.label`
   @media (max-width: 1000px) {
     padding: 12px;
     font-size: 13px;
-  
+
     &:hover {
       background: none;
     }

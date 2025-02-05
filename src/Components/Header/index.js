@@ -129,6 +129,10 @@ function Header() {
         <NavMenu open={menuOpen}>
           <LiStyle>
             <LinkStyle
+              href="/home">INICIO</LinkStyle>
+          </LiStyle>
+          <LiStyle>
+            <LinkStyle
               href="/checkinDelasFC">CHECK-IN DELASFC</LinkStyle>
           </LiStyle>
           <LiStyle>
