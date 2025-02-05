@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FaCalendar, FaCheck } from "react-icons/fa";
+import { FaCalendar, FaCheck, FaRegCheckCircle } from "react-icons/fa";
 
 const CheckinContainer = styled.div`
   display: flex;
@@ -46,6 +46,7 @@ const Button = styled.button`
   border-radius: 10px;
   box-shadow: 0px 0px 10px #464646;
   margin-top: 20px;
+  cursor: pointer;
 
   @media (max-width: 1000px) {
     font-size: 12px;
@@ -146,6 +147,116 @@ const CustomCheck = styled.div`
   font-size: 16px;
 `;
 
+/* MODAL */
+
+const ModalOverlay = styled.div`
+  display: ${(props) => (props.$isOpen ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 30px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1000px) {
+    width: 80vw;
+  }
+`;
+
+const Title = styled.h3`
+  font-size: 30px;
+  color: #523f85;
+  text-align: center;
+  margin: 0px 0px 20px 0px;
+`;
+
+const ModalForm = styled.div`
+  padding: 20px 40px;
+  background-color: #fafafa;
+  border: 1px solid #e7e7e7;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  height: 100%;
+  margin-bottom: 20px;
+  width: 80%;
+`;
+
+const ModalInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 20px;
+`;
+
+const ModalLabel = styled.h4`
+  font-size: 25px;
+  color: #523f85;
+  text-align: center;
+`;
+
+const ModalInput = styled.div`
+  width: 120%;
+  background-color: #e4e4e4;
+  padding: 15px;
+  border-radius: 40px;
+`;
+
+const ModalPlaceholder = styled.p`
+  text-align: center;
+  cursor: default;
+  color: #999;
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+const ModalButtons = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+`;
+
+const ModalButton = styled.button`
+  width: 150px;
+  padding: 15px;
+  border: none;
+  background-color: #523f85;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+`;
+
+const ModalIcon = styled(FaRegCheckCircle)`
+  font-size: 100px;
+  margin-bottom: 40px;
+  color: green;
+`;
+
 function CheckinSection({ title, trainings }) {
   const [selectedOption, setSelectedOption] = useState([]);
 
@@ -157,6 +268,40 @@ function CheckinSection({ title, trainings }) {
     );
   };
 
+  /*MODAL*/
+
+  const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
+  const [isModalConfirmedOpen, setIsModalConfirmedOpen] = useState(false);
+
+  const handleCheckinClick = () => {
+    setIsModalConfirmOpen(true);
+  };
+
+  const handleConfirmationClick = () => {
+    setIsModalConfirmedOpen(true);
+    setIsModalConfirmOpen(false);
+  }
+
+  const handleCloseModalConfirm = () => {
+    setIsModalConfirmOpen(false);
+  };
+
+  const handleCloseModalConfirmed = () => {
+    setIsModalConfirmedOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalConfirmOpen || isModalConfirmedOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalConfirmOpen, isModalConfirmedOpen]);
+
   return (
     <>
       <h2 style={{ textAlign: "center", fontSize: "35px", color: "523f85" }}>
@@ -165,7 +310,7 @@ function CheckinSection({ title, trainings }) {
       <CheckinContainer>
         <CheckinItems>
           <CalendarStyle />
-          <Button>Fazer Check-in</Button>
+          <Button onClick={handleCheckinClick}>Fazer Check-in</Button>
         </CheckinItems>
         <CheckinOptions>
           <OptionsTitle>Selecione o Treino</OptionsTitle>
@@ -198,6 +343,45 @@ function CheckinSection({ title, trainings }) {
           </CheckListContainer>
         </CheckinOptions>
       </CheckinContainer>
+
+      {/* MODAL */}
+
+      <ModalOverlay $isOpen={isModalConfirmOpen} onClick={handleCloseModalConfirm}>
+        <ModalContent onClick={(e) => e.stopPropagation()}>
+          <Title>CONFIRME SEU CHECK-IN</Title>
+          <ModalForm>
+            <ModalInputs style={{ marginTop: "5px" }}>
+              <ModalLabel>E-mail</ModalLabel>
+              <ModalInput>
+                <ModalPlaceholder>Formulario Ilustrativo</ModalPlaceholder>
+              </ModalInput>
+            </ModalInputs>
+            <ModalInputs style={{ marginBottom: "15px" }}>
+              <ModalLabel>Senha</ModalLabel>
+              <ModalInput>
+                <ModalPlaceholder>Formulario Ilustrativo</ModalPlaceholder>
+              </ModalInput>
+            </ModalInputs>
+          </ModalForm>
+          <ModalButtons>
+            <ModalButton onClick={handleConfirmationClick}>CONFIRMAR</ModalButton>
+            <ModalButton onClick={handleCloseModalConfirm}>CANCELAR</ModalButton>
+          </ModalButtons>
+        </ModalContent>
+      </ModalOverlay>
+
+      <ModalOverlay $isOpen={isModalConfirmedOpen} onClick={handleCloseModalConfirmed}>
+        <ModalContent onClick={(e) => e.stopPropagation()} style={{ paddingTop: "60px" }}>
+          <ModalForm style={{ gap: "10px" }}>
+            <Title>CHECK-IN CONFIRMADO!</Title>
+            <Title style={{ marginBottom: "40px" }}>NOS VEMOS EM QUADRA!</Title>
+            <ModalIcon />
+          </ModalForm>
+          <div>
+            <ModalButton onClick={handleCloseModalConfirmed}>FECHAR</ModalButton>
+          </div>
+        </ModalContent>
+      </ModalOverlay>
     </>
   );
 };
