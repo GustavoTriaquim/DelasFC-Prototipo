@@ -170,21 +170,23 @@ function CheckinSection({ title, trainings }) {
           <OptionsTitle>Selecione o Treino</OptionsTitle>
           <CheckListContainer>
             {trainings.map((training, index) => {
+              const isSelected = selectedOption.includes(index);
+
               return (
                 <CheckItem
                   key={index}
-                  selected={selectedOption.includes(index)}
+                  selected={isSelected}
                   onClick={() => toggleSelection(index)}
                   htmlFor={`check-${index}`}
                 >
                   <CheckInput
                     type="checkbox"
                     id={`check-${index}`}
-                    checked={selectedOption.includes(index)}
+                    checked={isSelected}
                     onChange={() => toggleSelection(index)}
                   />
-                  <CustomCheck selected={selectedOption.includes(index)}>
-                    {selectedOption.includes(index) && <FaCheck />}
+                  <CustomCheck selected={isSelected}>
+                    {isSelected && <FaCheck />}
                   </CustomCheck>
                   {training}
                 </CheckItem>

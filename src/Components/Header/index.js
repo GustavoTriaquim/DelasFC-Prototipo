@@ -137,7 +137,7 @@ function Header() {
           </LiStyle>
           <LiStyle>
             <LinkStyle
-              href="#">CONTATE-NOS</LinkStyle>
+              href="/contacts">CONTATE-NOS</LinkStyle>
           </LiStyle>
         </NavMenu>
         <Img
