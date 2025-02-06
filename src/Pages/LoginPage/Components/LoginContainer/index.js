@@ -82,11 +82,20 @@ const Text2 = styled.h2`
   }
 `;
 
-const Input = styled.div`
+const Input = styled.input`
   width: 100%;
   background-color: #e4e4e4;
   padding: 15px;
   border-radius: 40px;
+  text-align: center;
+  color: #0c0c0c;
+  font-weight: bold;
+  border: none;
+  font-size: 15px;
+
+  &::placeholder {
+    color: #999;
+  }
 `;
 
 const ButtonDiv = styled.div`
@@ -124,15 +133,11 @@ function LoginContainer() {
           <Form>
             <Inputs>
               <Text2>E-mail</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="email" placeholder="Digite Seu E-mail" />
             </Inputs>
             <Inputs>
               <Text2>Senha</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="password" placeholder="Digite Sua Senha" />
             </Inputs>
           </Form>
           <ButtonDiv>

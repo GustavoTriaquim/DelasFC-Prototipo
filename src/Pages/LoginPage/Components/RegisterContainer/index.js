@@ -42,7 +42,7 @@ const BorderC = styled.div`
   gap: 20px;
 
   @media (max-width: 1000px) {
-    padding: 20px 10px;
+    padding: 20px 15px;
   }
 `;
 
@@ -88,11 +88,20 @@ const Text2 = styled.h2`
   } 
 `;
 
-const Input = styled.div`
+const Input = styled.input`
   width: 100%;
   background-color: #e4e4e4;
   padding: 15px;
   border-radius: 40px;
+  text-align: center;
+  color: #0c0c0c;
+  font-weight: bold;
+  border: none;
+  font-size: 15px;
+
+  &::placeholder {
+    color: #999;
+  }
 `;
 
 const ButtonDiv = styled.div`
@@ -129,6 +138,10 @@ const CheckBoxes = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+  @media (max-width: 1000px) {
+    margin: 10px 0px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -136,6 +149,10 @@ const CheckBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 1000px) {
+    font-size: 13px;
+  }
 `;
 
 const HiddenCheckBox = styled.input`
@@ -172,39 +189,27 @@ function RegisterContainer() {
           <Form>
             <Inputs>
               <Text2>Nome Completo</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="text" placeholder="Digite Seu Nome" />
             </Inputs>
             <Inputs>
               <Text2>CPF</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="number" placeholder="Digite Seu CPF" />
             </Inputs>
             <Inputs>
               <Text2>Data de Nascimento</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="number" placeholder="Selecione Seu Nascimento" />
             </Inputs>
             <Inputs>
               <Text2>E-mail</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="email" placeholder="Digite Seu E-mail" />
             </Inputs>
             <Inputs>
               <Text2>Senha</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="password" placeholder="Digite Sua Senha" />
             </Inputs>
             <Inputs>
               <Text2>Confirmar Senha</Text2>
-              <Input>
-                <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
-              </Input>
+              <Input type="password" placeholder="Confirme Sua Senha" />
             </Inputs>
           </Form>
           <CheckBoxes>
