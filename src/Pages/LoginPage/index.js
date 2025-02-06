@@ -155,7 +155,9 @@ function LoginPage() {
           {isRegistering ?
             <RegisterText>Ja tem uma conta?</RegisterText> :
             <RegisterText>Nao tem uma conta?</RegisterText>}
-          <Button onClick={toggleIsRegistering}>CADASTRO</Button>
+          <Button onClick={toggleIsRegistering}>
+            {isRegistering ? "LOGIN" : "CADASTRO"}
+          </Button>
         </RegisterDiv>
       </Interface>
     </Main>

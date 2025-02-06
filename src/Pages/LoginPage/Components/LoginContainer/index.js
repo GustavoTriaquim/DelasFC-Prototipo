@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { FaCheck } from "react-icons/fa";
 
 const BorderA = styled.div`
   width: 100%;
@@ -115,46 +114,8 @@ const Button = styled.button`
   }
 `;
 
-const CheckBoxes = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-const CheckBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-`;
-
-const HiddenCheckBox = styled.input`
-  display: none;
-`;
-
-const CustomCheck = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  border: 2px solid #523f85;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ selected }) => (selected ? '#523f85' : 'transparent')};
-  color: ${({ selected }) => (selected ? "#fff" : "transparent")};
-  font-size: 14px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  cursor: pointer;
-`;
-
 function LoginContainer() {
   const navigate = useNavigate();
-  const [selectedCheck, setSelectedCheck] = useState("");
-
-  const handleCheckboxChange = (value) => {
-    setSelectedCheck(selectedCheck === value ? "" : value);
-  };
 
   return (
     <BorderA>
@@ -173,33 +134,6 @@ function LoginContainer() {
                 <p style={{ textAlign: "center", cursor: "default", color: "#999", fontWeight: "bold" }}>Formulario Ilustrativo</p>
               </Input>
             </Inputs>
-            <CheckBoxes>
-              <CheckBox
-                onClick={() => handleCheckboxChange("atleta")}
-              >
-                <HiddenCheckBox
-                  type="checkbox"
-                  checked={selectedCheck === "atleta"}
-                />
-                <CustomCheck selected={selectedCheck === "atleta"}>
-                  {selectedCheck === "atleta" && <FaCheck />}
-                </CustomCheck>
-                <p style={{ cursor: "pointer" }}>Sou atleta</p>
-              </CheckBox>
-              <CheckBox
-                onClick={() => handleCheckboxChange("propietario")}
-              >
-                <HiddenCheckBox
-                  type="checkbox"
-                  checked={selectedCheck === "propietario"}
-                  readOnly
-                />
-                <CustomCheck selected={selectedCheck === "propietario"}>
-                  {selectedCheck === "propietario" && <FaCheck />}
-                </CustomCheck>
-                <p style={{ cursor: "pointer" }}>Propietario(a) do time</p>
-              </CheckBox>
-            </CheckBoxes>
           </Form>
           <ButtonDiv>
             <Button onClick={() => navigate("/home")}>Fazer Login</Button>

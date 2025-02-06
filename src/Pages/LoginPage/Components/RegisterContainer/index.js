@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { FaCheck } from "react-icons/fa";
 
 const BorderA = styled.div`
   width: 40vw;
@@ -34,11 +35,11 @@ const BorderC = styled.div`
   background-color: #fff;
   border: 1px solid #523f85;
   border-radius: 30px;
-  padding: 30px;
+  padding: 15px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 
   @media (max-width: 1000px) {
     padding: 20px 10px;
@@ -123,8 +124,46 @@ const Button = styled.button`
   }
 `;
 
+const CheckBoxes = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+const CheckBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+const HiddenCheckBox = styled.input`
+  display: none;
+`;
+
+const CustomCheck = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid #523f85;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ selected }) => (selected ? '#523f85' : 'transparent')};
+  color: ${({ selected }) => (selected ? "#fff" : "transparent")};
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+`;
+
 function RegisterContainer() {
   const navigate = useNavigate();
+  const [selectedCheck, setSelectedCheck] = useState("");
+
+  const handleCheckboxChange = (value) => {
+    setSelectedCheck(selectedCheck === value ? "" : value);
+  };
 
   return (
     <BorderA>
@@ -168,6 +207,33 @@ function RegisterContainer() {
               </Input>
             </Inputs>
           </Form>
+          <CheckBoxes>
+            <CheckBox
+              onClick={() => handleCheckboxChange("atleta")}
+            >
+              <HiddenCheckBox
+                type="checkbox"
+                checked={selectedCheck === "atleta"}
+              />
+              <CustomCheck selected={selectedCheck === "atleta"}>
+                {selectedCheck === "atleta" && <FaCheck />}
+              </CustomCheck>
+              <p style={{ cursor: "pointer" }}>Sou atleta</p>
+            </CheckBox>
+            <CheckBox
+              onClick={() => handleCheckboxChange("propietario")}
+            >
+              <HiddenCheckBox
+                type="checkbox"
+                checked={selectedCheck === "propietario"}
+                readOnly
+              />
+              <CustomCheck selected={selectedCheck === "propietario"}>
+                {selectedCheck === "propietario" && <FaCheck />}
+              </CustomCheck>
+              <p style={{ cursor: "pointer" }}>Propietario(a) do time</p>
+            </CheckBox>
+          </CheckBoxes>
           <ButtonDiv>
             <Button onClick={() => navigate("/home")}>Fazer Cadastro</Button>
           </ButtonDiv>
